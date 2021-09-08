@@ -24,14 +24,11 @@ namespace MeasurementConversion.Core.Basement
         #region Interface Service Implementation
         public double DestinationToSource(double input)
         {
-            throw new NotImplementedException();
+            return XToY(input, Destination, Source);
         }
 
         public double SourceToDestination(double input)
         {
-            //if (units.BaseUnit == "celsius")
-            //    return TemperatureHelper.AToB(value, UnitLeft, UnitRight);
-
             return XToY(input, Source, Destination);
         }
 
