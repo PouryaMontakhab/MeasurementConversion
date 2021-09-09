@@ -7,13 +7,22 @@ namespace MeasurementConversion.UI
         static void Main(string[] args)
         {
             #region Fields
-            double source, destination;
+            string source, destination,next;
+            double input;
             #endregion
             #region Existing Measurement
-            var mtrToKm = new DistanceConverter("mm", "yd");
-            source = 16598;
-            destination = mtrToKm.SourceToDestination(source);
-            Console.WriteLine("16598 meter in kilometer is : " + destination);
+            var distanceConverter = new DistanceConverter();
+            distanceConverter.DistanceConverterMeasurementList();
+            do
+            {
+                distanceConverter.GetInputes(out input, out source, out destination);
+                distanceConverter.Source = source;
+                distanceConverter.Destination = destination;
+                var result = distanceConverter.SourceToDestination(input);
+                Console.WriteLine($"{input} {source} in {destination} is : " + result);
+                Console.WriteLine("would you like to continue? y||n");
+                next = Console.ReadLine();
+            } while (next != "n");
             #endregion
             #region New Measurement
             //var distanceConverter = new DistanceConverter();

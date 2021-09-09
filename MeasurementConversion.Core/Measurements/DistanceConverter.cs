@@ -28,6 +28,16 @@ namespace MeasurementConversion.Core.Measurements
         {
             Instantiate(measurements);
         }
-        #endregion       
+        public void DistanceConverterMeasurementList()
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            foreach (var item in measurements)
+                Console.WriteLine($"Key is : {item.Key} with value : {item.Value}");
+            Console.ForegroundColor = ConsoleColor.White;
+
+        }
+
+      
+        #endregion
     }
 }

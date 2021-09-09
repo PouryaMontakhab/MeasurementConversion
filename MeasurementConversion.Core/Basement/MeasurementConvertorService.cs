@@ -31,20 +31,30 @@ namespace MeasurementConversion.Core.Basement
         {
             return XToY(input, Source, Destination);
         }
-
         private double XToY(double input, string source, string destination)
         {
             var sourceFactor = Measurements.FindFactor(source);
             var destinationFactor = Measurements.FindFactor(destination);
-            var result = (input / sourceFactor) * destinationFactor;
-            return result.CheckCloseEnoughValue();
+            return (ToBase(input,sourceFactor)) * destinationFactor;
         }
+        private double ToBase(double input, double sourceFactor) => input / sourceFactor;
         #endregion
         #region Methods
         public void AddMeasurement(MeasurementFactorSynonyms synonyms, double factor)
         {
             ValidateNewSynonym(synonyms);
             Measurements.Add(synonyms, factor);
+        }
+        public void GetInputes(out double input,out string source,out string destination)
+        {
+            Console.WriteLine("please enter your number");
+            input = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("please enter your source key");
+            source = Console.ReadLine();
+            ValidateSynonymExists(source);
+            Console.WriteLine("please enter your destination key");
+            destination = Console.ReadLine();
+            ValidateSynonymExists(destination);
         }
         #endregion
         #region Configuration
@@ -94,7 +104,7 @@ namespace MeasurementConversion.Core.Basement
         #region Validation
         private void ValidateSynonymExists(string synonym)
         {
-            if (null == Measurements.FindMeasurement(synonym))
+            if (Measurements.FindMeasurement(synonym) == null)
             {   
                 throw new MeasurementNotSupportedException(synonym);
             }
