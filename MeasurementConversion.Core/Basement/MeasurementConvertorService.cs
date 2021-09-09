@@ -41,7 +41,11 @@ namespace MeasurementConversion.Core.Basement
         }
         #endregion
         #region Methods
-
+        public void AddMeasurement(MeasurementFactorSynonyms synonyms, double factor)
+        {
+            ValidateNewSynonym(synonyms);
+            Measurements.Add(synonyms, factor);
+        }
         #endregion
         #region Configuration
         private MeasurementFactors measurements;
@@ -58,7 +62,6 @@ namespace MeasurementConversion.Core.Basement
                 measurements = value;
             }
         }
-
         private string source, destination;
         public string Source {
             get
